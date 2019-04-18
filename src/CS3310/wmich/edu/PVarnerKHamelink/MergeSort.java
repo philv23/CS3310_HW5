@@ -39,8 +39,8 @@ public class MergeSort {
 		 * for(int i = 0; i < length; i++) { System.out.println(buffer[i]);
 		 * System.out.println(values[i]); }
 		 */
-
-		int num = length / 2;
+		
+		int num = length;
 		MergeSort(buffer, num);
 		
 		String file2 = "hw5SampleData#2.dat";
