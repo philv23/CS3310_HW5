@@ -7,6 +7,9 @@ import java.io.RandomAccessFile;
 public class Main {
 
 	public static void main(String[] args) throws IOException {
+		int bufferMaxSize = 
+		
+		
 		RandomAccessFile randFile = new RandomAccessFile("hw5SampleData.dat", "rw");
 		long n = randFile.length();
 		n = n / 4;
@@ -16,6 +19,8 @@ public class Main {
 		}
 		
 		randFile.close();
+		
+		
 	}
 
 }
