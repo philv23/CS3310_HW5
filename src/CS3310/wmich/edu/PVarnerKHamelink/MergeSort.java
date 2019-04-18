@@ -9,6 +9,8 @@ public class MergeSort {
 			return;
 		}
 		
+		
+		
 		int mid = n/2;
 		int[] left = new int[mid];
 		int[] right = new int[n - mid];
