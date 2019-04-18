@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 
 public class MergeSort {
+	int k;
 
 	static int[] buffer;
 	static int[] values;
