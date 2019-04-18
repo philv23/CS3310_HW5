@@ -8,14 +8,26 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		
-		
 		RandomAccessFile randFile = new RandomAccessFile("hw5SampleData.dat", "rw");
 		long n = randFile.length();
 		n = n / 4;
-		for(int i = 0; i < n; i++) {
-			int num = randFile.readInt();
-			System.out.println(num);
+		int length = (int) n;
+		int[] arr = new int[length];
+		for(int i = 0; i < length; i++) {
+			arr[i] = randFile.readInt();
+			System.out.println(arr[i]);
 		}
+		
+		System.out.println("------------------------------");
+		
+		MergeSort sort = new MergeSort();
+		
+		sort.MergeSort(arr, length);
+		
+		for(int i = 0; i < length; i++) {
+			System.out.println(arr[i]);
+		}
+		
 		
 		randFile.close();
 		
