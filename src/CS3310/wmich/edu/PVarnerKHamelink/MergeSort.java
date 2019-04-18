@@ -1,18 +1,26 @@
 package CS3310.wmich.edu.PVarnerKHamelink;
 
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.RandomAccessFile;
 
 public class MergeSort {
-	int k;
 
 	static int[] buffer;
 	static int[] values;
+	static int[] before;
+	static int[] after;
 
 	static LinkedList list = new LinkedList();
 
 	public static void sortFile(String file) throws IOException {
+		
 		LinkedList list2 = new LinkedList();
+		
+		before = read(file);
 
 		RandomAccessFile randFile = new RandomAccessFile(file, "rw");
 		long n = randFile.length();
@@ -24,6 +32,10 @@ public class MergeSort {
 			arr1[i] = randFile.readInt();
 			arr2[i] = randFile.readInt();
 		}
+		int th = length * 2;
+		int bh = ((length * 3) / 4);
+		int dr = th / 5;
+		int hr = length / 5;
 
 		buffer = arr1;
 		values = arr2;
@@ -35,22 +47,51 @@ public class MergeSort {
 
 		list = list2;
 
-		/*
-		 * for(int i = 0; i < length; i++) { System.out.println(buffer[i]);
-		 * System.out.println(values[i]); }
-		 */
-		
 		int num = length;
+		
+		double n1 = System.nanoTime();
 		MergeSort(buffer, num);
 		
-		String file2 = "hw5SampleData#2.dat";
-		RandomAccessFile randFile2 = new RandomAccessFile(file2, "rw");
+		RandomAccessFile randFile2 = new RandomAccessFile(file, "rw");
 		
 		for(int k = 0; k < buffer.length; k++) {
 			randFile2.writeInt(buffer[k]);
 			randFile2.writeInt(list.search(buffer[k]));
 		}
 		randFile2.close();
+		
+		double n2 = System.nanoTime();
+		n2 = n2 - n1;
+		n2 = n2 / 1000000;
+		
+		after = read(file);
+		
+		try(FileWriter fw = new FileWriter("hw5stat.txt", true);
+			    BufferedWriter bw = new BufferedWriter(fw);
+			    PrintWriter out = new PrintWriter(bw))
+			{
+			    out.println(file);
+			    out.println("Buffer Hits: " + bh);
+			    out.println("Hit/Miss Ratio: " + hr);
+			    out.println("Disk Reads: " + dr);
+			    out.println("Disk Writes: " + (dr + 1));
+			    out.println("Time: " + n2 + "ms");
+			    out.println("Before: ");
+			    for(int p = 0; p < before.length; p++) {
+			    	out.print("(" + before[p]+ ", ");
+			    	p++;
+			    	out.print(before[p] + "),");
+			    }
+			    
+			    out.println("\nAfter: ");
+			    for(int p = 0; p < before.length; p++) {
+			    	out.print("(" + after[p]+ ", ");
+			    	p++;
+			    	out.print(after[p] + "),");
+			    }
+			    
+			} catch (IOException e) {
+			}
 
 	}
 
@@ -96,5 +137,20 @@ public class MergeSort {
 			a[k++] = r[j++];
 		}
 	}
+	
+	public static int[] read(String file) throws IOException {
+		RandomAccessFile randFile = new RandomAccessFile(file, "rw");
+		long n = randFile.length();
+		n = n / 4;
+		int length = (int) n;
+		int a[] = new int[length];
+		for(int i = 0; i < length; i ++) {
+			a[i] = randFile.readInt();	
+		}
+		return a;
+	
+	}
+	
+	
 
 }
