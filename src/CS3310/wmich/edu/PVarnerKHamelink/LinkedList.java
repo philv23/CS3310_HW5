@@ -124,12 +124,19 @@ public class LinkedList {
 		head1.value = val2;
 
 	}
-	
+
+	/**
+	 * Searches the linked list for the given key
+	 * 
+	 * @param key
+	 * @return node.value
+	 */
+
 	public int search(int key) {
 		Node head1 = head;
 		int size1 = size();
 		for (int i = 0; i < size1; i++) {
-			if(head1.key == key) {
+			if (head1.key == key) {
 				return head1.value;
 			}
 			head1 = head1.next;

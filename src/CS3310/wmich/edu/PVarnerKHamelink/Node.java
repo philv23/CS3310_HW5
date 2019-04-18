@@ -1,6 +1,5 @@
 package CS3310.wmich.edu.PVarnerKHamelink;
 
-
 public class Node {
 	int key;
 	int value;
