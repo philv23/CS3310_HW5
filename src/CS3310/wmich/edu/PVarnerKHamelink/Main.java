@@ -20,18 +20,13 @@ public class Main {
 		
 		System.out.println("------------------------------");
 		
-		MergeSort sort = new MergeSort();
-		
-		sort.MergeSort(arr, length);
+		MergeSort.MergeSort(arr, length);
 		
 		for(int i = 0; i < length; i++) {
 			System.out.println(arr[i]);
 		}
-		
-		
+				
 		randFile.close();
-		
-		
 	}
 
 }
